@@ -1,0 +1,16 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        count = defaultdict(int)
+        ans = l = maxf = 0
+        for r in range(len(s)):
+            count[s[r]] += 1
+            maxf = max(maxf, count[s[r]])
+
+            while (r - l + 1) - maxf > k:
+                count[s[l]] -= 1
+                maxf = max(maxf, count[s[l]])
+                l += 1
+
+            ans = max(ans, r - l + 1)
+        
+        return ans
